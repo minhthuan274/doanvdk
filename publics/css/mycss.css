@@ -1,0 +1,49 @@
+#header nav{
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+body{
+    padding-top: 70px;
+    padding-bottom: 10px;
+}
+#content .jumbotron{
+    background: #A9A9A9 url(../img/jbt.jpg) center no-repeat;
+    background-size: cover;
+    color: white;
+    padding: 70px 0px;
+}
+.feature1, .feature2, .feature3{
+    padding: 50px 0px;
+}
+.feature2{
+    background-color: #8B4513;
+    color: white;
+}
+.feature3 .content{
+    text-align: center;
+    vertical-align: middle;
+    height: 100%;
+    background-color: yellow;
+}
+.feature3 .col-md-6, .feature3 .col-sm-6{
+    padding: 30px 0px;
+    background-color: blue;
+}
+.footer{
+    padding: 10px 0px;
+    text-align: right;
+    background-color: #F5F5F5;
+}
+.card{
+    margin: 0 auto;
+}
+.card-img-top{
+    margin-top:10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
