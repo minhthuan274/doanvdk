@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Control</title>
+        <!-- My css -->
+        <link rel="stylesheet" href="css/mycss.css">
+        <!-- Google icon -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <!-- Socket.io -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+        var socket = io();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">IoT for EveryOne</a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/setup">Setting</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link disabled" href="#">Control</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <span class="btn btn-outline-success"><%=name%></span>
+                        <a href="#" class="nav-link btn btn-outline-success">LOGOUT</a>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <div id="accordion" role="tablist">
+          <% for(var i=0; i<data.length; i++){%>
+          <div class="card">
+            <div class="card-header" role="tab" id="heading<%=i%>">
+              <h5 class="mb-0">
+                <a class="<% if(i != 0){%> collapsed <%}%>btn btn-block" colla data-toggle="collapse"
+                href="#collapse<%= i %>"
+                <% if(i == 0){%>
+                  aria-expanded="true"
+                <%}else{%>
+                  aria-expanded="false"
+                <%}%>
+                aria-controls="collapse<%=i%>">
+                  <%=data[i].name%>
+                </a>
+              </h5>
+            </div>
+            <div id="collapse<%=i%>" class="collapse show" role="tabpanel" aria-labelledby="heading<%=i%>" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3">
+                    <a class="btn btn-outline-success btnEdit" href="/setup/<%=data[i]._id%>" style="display: flex;">Edit Equipment's name</a><br>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-4 btnEdit">
+                        <i class="material-icons" style="font-size:40px;color:green;">offline_pin</i>
+                        <a href="#" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output1%></a>
+                      </div>
+                      <div class="col-md-4 btnEdit">
+                        <i class="material-icons" style="font-size:40px;color:green;">offline_pin</i>
+                        <a href="#" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output2%></a>
+                      </div>
+                      <div class="col-md-4 btnEdit">
+                        <i class="material-icons" style="font-size:40px;color:green;">offline_pin</i>
+                        <a href="#" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output3%></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a class="btn btn-outline-success btn-block" href="#" role="button"><%=data[i].input1%></a>
+                      </div>
+                      <div class="col-md-6">
+                        <a class="btn btn-outline-success btn-block" href="#" role="button"><%=data[i].input2%></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%}%>
+        </div>
+
+        <footer class="footer fixed-bottom">
+          <div class="container">
+              <span class="text-muted">Phát triển bởi đội kỹ sư tương lai</span>
+          </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    </body>
+</html>
