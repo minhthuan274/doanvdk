@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <link rel="shortcut icon" href="favicon.ico">
-    <title>Login - VDK</title>
+    <title>CONTROL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/mycss.css">
     <!-- Bootstrap CSS -->
@@ -42,9 +42,23 @@
         <div class="card justify-content-center" style="width: 27rem;" >
             <img class="card-img-top" src="img/IOT_LOGO.png" alt="IOT_LOGO" width="100%" height="auto">
             <div class="card-body">
-              <%for(var i=0; i<data.length; i++){%>
-                <a class="btn btn-primary" href="#" role="button">Link</a><a class="btn btn-primary" href="#" role="button">Link</a> <br>
-              <%}%>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Choose your Equipment</th>
+                    <th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(var i=0; i<data.length; i++){%>
+                    <tr>
+                      <td><a class="btn btn-primary btn-block" href="/control/<%=data[i]._id%>" role="button"><%=data[i].name%></a></td>
+                      <td><a class="btn btn-primary btn-block" href="/setup/<%=data[i]._id%>" role="button">Edit</a></td>
+                    </tr>
+                  <%}%>
+                </tbody>
+              </table>
+
             </div>
         </div>
 
