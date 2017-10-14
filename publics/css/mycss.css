@@ -1,3 +1,9 @@
+.btnEdit{
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
 #header nav{
     background-color: white;
     padding-top: 10px;
@@ -46,4 +52,10 @@ body{
     margin-top:10px;
     margin-right: 10px;
     margin-left: 10px;
+}
+.btnEdit{
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
