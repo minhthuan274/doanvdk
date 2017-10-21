@@ -13,8 +13,25 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <!-- Socket.io -->
         <script src="/socket.io/socket.io.js"></script>
+        <script src="jquery-3.2.1.slim.min.js"> </script>
         <script>
         var socket = io();
+        <% for(var i=0; i<data.length; i++){%>
+          <% for(var j=1; j<=3; j++){%>
+            $(document).on("click", '#btn<%=i%><%=j%>', function () {
+              console.log(<%= i%> +" "+<%= j%>);
+              var color= $("#icon<%=i%><%=j%>").css("color");
+              console.log(color);
+              if ( color != 'rgb(0, 128, 0)' ) {
+                socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '1'});
+                $("#icon<%=i%><%=j%>").css('color', 'green');
+              } else {
+                socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '0'});
+                $("#icon<%=i%><%=j%>").css('color', '#5f5f5f');
+              }
+            });
+          <%}%>
+        <%}%>
         </script>
     </head>
     <body>
@@ -51,13 +68,7 @@
             <div class="card-header" role="tab" id="heading<%=i%>">
               <h5 class="mb-0">
                 <a class="<% if(i != 0){%> collapsed <%}%>btn btn-block" colla data-toggle="collapse"
-                href="#collapse<%= i %>"
-                <% if(i == 0){%>
-                  aria-expanded="true"
-                <%}else{%>
-                  aria-expanded="false"
-                <%}%>
-                aria-controls="collapse<%=i%>">
+                href="#collapse<%= i %>" aria-expanded="true" id="<%=data[i]._id%>">
                   <%=data[i].name%>
                 </a>
               </h5>
@@ -66,29 +77,36 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-3">
-                    <a class="btn btn-outline-success btnEdit" href="/setup/<%=data[i]._id%>" style="display: flex;">Edit Equipment's name</a><br>
+                    <a class="btn btn-outline-success btnEdit" href="/setup/<%=data[i]._id%>" style="display: flex;">Edit Equipment-name</a><br>
                   </div>
                   <div class="col-md-9">
-                    <div class="row">
+                    <div class="row" >
                       <div class="col-md-4 btnEdit">
-                        <i class="material-icons" style="font-size:40px;color:green;">offline_pin</i>
-                        <a href="#" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output1%></a>
+                        <i id="icon<%=i%>1" class="material-icons" style="font-size:40px; <%if(data[i].valout1==1){%>color:green;<%}else{%>color:#5f5f5f;<%}%>">
+                            offline_pin</i>
+                        <span id="btn<%=i%>1" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output1%></span>
                       </div>
                       <div class="col-md-4 btnEdit">
-                        <i class="material-icons" style="font-size:40px;color:green;">offline_pin</i>
-                        <a href="#" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output2%></a>
+                        <i id="icon<%=i%>2" class="material-icons" style="font-size:40px; <%if(data[i].valout2==1){%>color:green;<%}else{%>color:#5f5f5f;<%}%>">
+                            offline_pin</i>
+                        <span id="btn<%=i%>2" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output2%></span>
                       </div>
                       <div class="col-md-4 btnEdit">
-                        <i class="material-icons" style="font-size:40px;color:green;">offline_pin</i>
-                        <a href="#" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output3%></a>
+                        <i id="icon<%=i%>3" class="material-icons" style="font-size:40px; <%if(data[i].valout3==1){%>color:green;<%}else{%>color:#5f5f5f;<%}%>">
+                            offline_pin</i>
+                        <span id="btn<%=i%>3" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output3%></span>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
-                        <a class="btn btn-outline-success btn-block" href="#" role="button"><%=data[i].input1%></a>
+                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button">
+                          <%=data[i].input1%>:&nbsp;<%=data[i].valin1%>
+                        </a>
                       </div>
                       <div class="col-md-6">
-                        <a class="btn btn-outline-success btn-block" href="#" role="button"><%=data[i].input2%></a>
+                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button">
+                          <%=data[i].input2%>:&nbsp;<%=data[i].valin2%>
+                        </a>
                       </div>
                     </div>
                   </div>

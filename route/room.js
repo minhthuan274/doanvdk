@@ -51,3 +51,32 @@ module.exports.setup= function(newroom, callback){
 module.exports.findByIdUser= function(userId, callback) {
   room.find({userId: userId}, callback);
 }
+
+// module.exports.updateChange= function(data, callback){
+//   var set;
+//   if (data.equip == 1) {
+//     set= {
+//       output1: data.value;
+//     }
+//   } else {
+//     if (data.equip == 2) {
+//       set= {
+//         output2: data.value;
+//       }
+//     } else {
+//       set= {
+//         output3: data.value;
+//       }
+//     }
+//   }
+//   room.update(
+//     {_id: id},
+//     {$set: set},
+//     (err, doc)=>{
+//       if (err) {};
+//       else{
+//         ;
+//       }
+//     }
+//   );
+// }

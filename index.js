@@ -10,7 +10,7 @@ var db= mongoose.connection;
 app.use(express.static("publics"));
 app.set('view engine','ejs');
 app.set('views','./viewBootstrap');
-http.listen(3000, function() {
+http.listen(3000,'192.168.0.102', function() {
   console.log("On server");
 });
 

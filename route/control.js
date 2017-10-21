@@ -1,6 +1,8 @@
 var express= require('express'),
     router= express.Router(),
-    room= require('./room.js');
+    room= require('./room.js'),
+    bodyParser= require('body-parser'),
+    urlencodedParser= bodyParser.urlencoded({extended: false});
 
 function ensureAuth(req,res,next) {
   if(req.isAuthenticated()) return next();
@@ -16,18 +18,17 @@ router.get("/", ensureAuth, function(req,res) {
   room.findByIdUser(req.user._id, (err, docs)=>{
     if (err) res.render('alert', {content: 'Database was errored'});
     else {
-      res.render('controlSocket', {name: req.user.fullname, data: docs});
+      res.render('controlSocket', {name: req.user.fullname, id: req.user._id , data: docs});
     }
   });
 });
 
-//Page khong can nua - dung chung vs page view Equip
-// router.get("/:id", ensureAuth, (req, res)=>{
-//   var id= req.params.id;
-//   room.findById(id, (err, doc)=>{
-//     if (err) res.render('alert', {content: 'Database was errored'});
-//     else{
-//       res.render('socket',{name: req.user.fullname, data: docs})
-//     }
-//   })
-// })
+router.get("/:id"+"json", function(req,res) {
+  var id= req.params.id;
+  room.findById(id, (err, docs)=>{
+    if (err) res.render('alert', {content: 'Database was errored'});
+    else {
+      res.send(docs);
+    }
+  });
+});
