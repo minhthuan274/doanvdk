@@ -93,6 +93,7 @@ void setup() {
   }
   Serial.println("WiFi connected");
   connectToHost();
+  wdt_disable();
 }
 
 void loop() {
@@ -101,6 +102,5 @@ void loop() {
   Serial.print("Out3: "); Serial.println(valout3);
   Serial.print("In1: "); Serial.println(valin1);
   Serial.print("In2: "); Serial.println(valin2);
-  while(1){}
+  while(1){;}
 }
-
