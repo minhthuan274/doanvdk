@@ -1,15 +1,23 @@
 var room= require('../route/room.js');
 
-module.exports = function(io){
-  io.on('connection', function (socket) {
+exports= module.exports = function(io){
+  io.sockets.on('connection', (socket)=>{
     console.log("New");
-    socket.on('webChange', function(data) {
+    socket.on('webChange', (data)=>{
+			room.updateChange(data, (err, doc)=>{
+				if (err) {
+          throw err ;
+          console.log("err");
+        }
+			});
       console.log(data);
       io.emit('equipLoad',data);
     });
-    socket.on('EquipChange', function(data) {
-      console.log(data);
-      io.emit('webLoad', data);
-    })
+    socket.on('equipChange', function(data) {
+      console.log(data.id);
+      console.log(data.equip);
+      console.log(data.value);
+      io.emit('webLoad', data)
+    });
   });
 }

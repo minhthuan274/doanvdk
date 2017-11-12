@@ -16,22 +16,24 @@
         <script src="jquery-3.2.1.slim.min.js"> </script>
         <script>
         var socket = io();
-        <% for(var i=0; i<data.length; i++){%>
-          <% for(var j=1; j<=3; j++){%>
-            $(document).on("click", '#btn<%=i%><%=j%>', function () {
-              console.log(<%= i%> +" "+<%= j%>);
-              var color= $("#icon<%=i%><%=j%>").css("color");
-              console.log(color);
-              if ( color != 'rgb(0, 128, 0)' ) {
-                socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '1'});
-                $("#icon<%=i%><%=j%>").css('color', 'green');
-              } else {
-                socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '0'});
-                $("#icon<%=i%><%=j%>").css('color', '#5f5f5f');
-              }
-            });
+        $(function() {
+          <% for(var i=0; i<data.length; i++){%>
+            <% for(var j=1; j<=3; j++){%>
+              $('#btn<%=i%><%=j%>').click(function () {
+                console.log(<%= i%> +" "+<%= j%>);
+                var color= $("#icon<%=i%><%=j%>").css("color");
+                // console.log(color);
+                if ( color != 'rgb(0, 128, 0)' ) {
+                  socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '1'});
+                  $("#icon<%=i%><%=j%>").css('color', 'green');
+                } else {
+                  socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '0'});
+                  $("#icon<%=i%><%=j%>").css('color', '#5f5f5f');
+                }
+              });
+            <%}%>
           <%}%>
-        <%}%>
+        })
         </script>
     </head>
     <body>
