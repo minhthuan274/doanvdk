@@ -71,3 +71,7 @@ module.exports.updateChange= function(data, callback){
   }
   room.update({_id: data.id},{$set: set}, callback);
 }
+
+module.exports.updateSensor= function(data, callback){
+  room.update({_id: data.name},{$set: {valin1: data.sensor1, valin2: data.sensor2}}, callback);
+}

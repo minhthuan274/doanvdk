@@ -1,6 +1,11 @@
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
 #include <SocketIOClient.h>
+#include "DHT.h"
+
+#define DHTPIN D5
+#define DHTTYPE DHT11
+DHT dht( DHTPIN, DHTTYPE);
 
 SocketIOClient io;
 
@@ -17,7 +22,7 @@ String id   = "59ceb2ab498e6f376c0336b5";
 const int in1 = D6, in2 = D7, in3 = D8, out1 = D0, out2 = D1, out3 = D2;
 int valout1 = 0, valout2 = 0, valout3 = 0, valin1 = 0, valin2 = 0;
 unsigned long previousMillis = 0;
-long interval = 60000;
+int interval =10000;
 
 WiFiClient client;
 
@@ -33,18 +38,19 @@ void setupPinMode() {
   digitalWrite(out2, !valout2);
   digitalWrite(out3, !valout3);
 }
-
 void connectToWifi() {
   WiFi.begin(ssid, password);
+  int count=0;
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
+    count++;
+    if (count==120) while(1){;}
   }
   Serial.println("WiFi connected");
   Serial.println(F("Di chi IP cua ESP8266 (Socket Client ESP8266): "));
   Serial.println(WiFi.localIP());
 }
-
 void getDataFirst() {
   Serial.println("Alo");
   //  path += id + ".json";
@@ -104,16 +110,17 @@ void getDataFirst() {
     }
   }
 }
-
 void connectToHost() {
   Serial.print("connecting to: "); Serial.println(host);
+  int count=0;
   while (!client.connect(host, 3000)) {
     Serial.println("connection failed");
     delay(500);
-    return;
+    count++;
+    if(count==120) while(1){;}
   }
+  getDataFirst();
 }
-
 void connectWithSocket() {
   if (!io.connect(host, 3000)) {
     Serial.println(F("Ket noi den socket server that bai!"));
@@ -124,7 +131,6 @@ void connectWithSocket() {
     io.send("connection", "message", "Connected !!!!");
   }
 }
-
 void socketToVal(String line) {
   Serial.println(line);
   int size = line.length() + 1;
@@ -174,13 +180,14 @@ void setup() {
   // connect esp to wifi, afer that esp connect to host: 192.168.0.102
   Serial.print("Connecting to "); Serial.println(ssid);
   connectToWifi();
+  // connect to host and get data for all equip
   connectToHost();
-  Serial.println("Connect success");
-  // get data for all equip
   getDataFirst();
+  Serial.println("Connect success");
   // connect esp to server socket
   connectWithSocket();
-
+  // initialize dht 11
+  dht.begin();
   Serial.println("Hello, we go to Loop()");
   ESP.wdtFeed();
 }
@@ -198,33 +205,37 @@ void loop() {
 
   if( millis() - previousMillis > interval){
     previousMillis= millis();
-    io.send("")
+    Serial.println("Connect success");
+    // Read humidity
+    float h = dht.readHumidity();
+    // Read temperature as Celsius (the default)
+    float t = dht.readTemperature();
+    io.send("uploadSensor", "{ \"name\": \""+id+"\", \"sensor1\": "+String(h)+", \"sensor2\": "+String(t)+" }");
   }
 
-  //  if (digitalRead(in1)) {
-  // digitalWrite(out1, valout1);
-  // valout1 = !valout1;
-  // io.send("connection", "message", "Connected !!!!");
-  // while (digitalRead(in1)) {
-  //   ;
-  // }
-  //    delay(100);
-  //  }
-  // if (digitalRead(in2)) {
-  //   digitalWrite(out2, valout2);
-  //   valout2 = !valout2;
-  //   while (digitalRead(in2)) {
-  //     ;
-  //   }
-  //   delay(100);
-  // }
-  // if (digitalRead(in3)) {
-  //   digitalWrite(out3, valout3);
-  //   valout3 = !valout3;
-  //   while (digitalRead(in3)) {
-  //     ;
-  //   }
-  //   delay(100);
-  // }
+  if (digitalRead(0)==0) {
+    digitalWrite(out1, valout1);
+    valout1 = !valout1;
+    io.send("equipChange", "{ \"id\": \""+id+"\", \"equip\": "+String(1)+", \"value\": "+String(valout1)+" }");
+    while (digitalRead(0)==0) {;}
+  }
+  if (digitalRead(in1)==1) {
+    digitalWrite(out1, valout1);
+    valout1 = !valout1;
+    io.send("equipChange", "{ \"id\": \""+id+"\", \"equip\": "+String(1)+", \"value\": "+String(valout1)+" }");
+    while (digitalRead(in1)==1) {;}
+  }
+  if (digitalRead(in2)==1) {
+    digitalWrite(out2, valout2);
+    valout2 = !valout2;
+    io.send("equipChange", "{ \"id\": \""+id+"\", \"equip\": "+String(2)+", \"value\": "+String(valout2)+" }");
+    while (digitalRead(in2)==1) {;}
+  }
+  if (digitalRead(in3)==1) {
+    digitalWrite(out3, valout3);
+    valout3 = !valout3;
+    io.send("equipChange", "{ \"id\": \""+id+"\", \"equip\": "+String(3)+", \"value\": "+String(valout3)+" }");
+    while (digitalRead(in3)==1) {;}
+  }
   ESP.wdtEnable(1000);
 }

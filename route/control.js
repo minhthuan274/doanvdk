@@ -10,7 +10,6 @@ function ensureAuth(req,res,next) {
 }
 
 module.exports = router;
-// app.use('/control', require('./route/control.js'));
 router.use(express.static("publics"));
 
 // view All Equip, choose to edit and control
