@@ -10,6 +10,8 @@
 body{
     padding-top: 70px;
     padding-bottom: 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 #content .jumbotron{
     background: #A9A9A9 url(../img/jbt.jpg) center no-repeat;
@@ -38,6 +40,9 @@ body{
     padding: 10px 0px;
     text-align: right;
     background-color: #F5F5F5;
+}
+.footer-home {
+    margin-bottom: -50px;
 }
 .card{
     margin: 0 auto;
