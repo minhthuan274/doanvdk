@@ -1,3 +1,9 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 #header nav{
     background-color: white;
     padding-top: 10px;
@@ -6,12 +12,8 @@
     text-align: center;
     text-transform: uppercase;
 }
-
-body{
-    padding-top: 70px;
-    padding-bottom: 50px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+#header .nav-item{
+    margin: 6px;
 }
 #content .jumbotron{
     background: #A9A9A9 url(../img/jbt.jpg) center no-repeat;
@@ -22,9 +24,17 @@ body{
 .feature1, .feature2, .feature3{
     padding: 50px 0px;
 }
+.feature1 div div div {
+    background-color: rgb(247, 244, 242);
+    padding: 20px 10px;
+    height: 100%;
+    margin-top: -20px;
+}
 .feature2{
-    background-color: #8B4513;
-    color: white;
+    background-image: linear-gradient(to bottom, #00515f, #51af90);
+    color: whitesmoke;
+    font-family: Roboto, sans-serif;
+    padding: 70px 10px;
 }
 .feature3 .content{
     text-align: center;
