@@ -52,7 +52,10 @@ router.get("/:id", ensureAuth, function(req, res) {
 router.post("/:id", urlencodedParser, ensureAuth, (req,res)=>{
   let id= req.params.id;
   room.update(
-    {_id: id},
+    {
+      _id: id,
+      userId: req.user._id
+    },
     {$set: {
       name: req.body.eqname,
       output1: req.body.output1,

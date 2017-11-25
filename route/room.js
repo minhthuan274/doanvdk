@@ -52,31 +52,26 @@ module.exports.findByIdUser= function(userId, callback) {
   room.find({userId: userId}, callback);
 }
 
-// module.exports.updateChange= function(data, callback){
-//   var set;
-//   if (data.equip == 1) {
-//     set= {
-//       output1: data.value;
-//     }
-//   } else {
-//     if (data.equip == 2) {
-//       set= {
-//         output2: data.value;
-//       }
-//     } else {
-//       set= {
-//         output3: data.value;
-//       }
-//     }
-//   }
-//   room.update(
-//     {_id: id},
-//     {$set: set},
-//     (err, doc)=>{
-//       if (err) {};
-//       else{
-//         ;
-//       }
-//     }
-//   );
-// }
+module.exports.updateChange= function(data, callback){
+  var set;
+  if (data.equip == 1) {
+    set= {
+      valout1: data.value
+    }
+  } else {
+    if (data.equip == 2) {
+      set= {
+        valout2: data.value
+      }
+    } else {
+      set= {
+        valout3: data.value
+      }
+    }
+  }
+  room.update({_id: data.id},{$set: set}, callback);
+}
+
+module.exports.updateSensor= function(data, callback){
+  room.update({_id: data.name},{$set: {valin1: data.sensor1, valin2: data.sensor2}}, callback);
+}

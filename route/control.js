@@ -10,7 +10,6 @@ function ensureAuth(req,res,next) {
 }
 
 module.exports = router;
-// app.use('/control', require('./route/control.js'));
 router.use(express.static("publics"));
 
 // view All Equip, choose to edit and control
@@ -22,6 +21,10 @@ router.get("/", ensureAuth, function(req,res) {
     }
   });
 });
+
+router.get('/test', function(req,res) {
+  res.render('socket');
+})
 
 router.get("/:id"+".json", function(req,res) {
   var id= req.params.id;
@@ -36,19 +39,6 @@ router.get("/:id"+".json", function(req,res) {
         valout2: data.valout2,
         valout3: data.valout3
       });
-      // {"_id":"59ceb2ab498e6f376c0336b5",
-      // "userId":"59be2f744dde851be42b637d",
-      // "name":"ESP8266 nhà Tùng",
-      // "output1":"Light room","__v":0,
-      // "valin2":0,
-      // "input2":"nhiet do",
-      // "valin1":0,
-      // "input1":"do am",
-      // "valout3":1,
-      // "output3":"tv",
-      // "valout2":0,
-      // "output2":"Fan",
-      // "valout1":1}
     }
   });
 });
