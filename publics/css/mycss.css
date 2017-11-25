@@ -44,6 +44,7 @@ body {
     color: whitesmoke;
     font-family: Roboto, sans-serif;
     padding: 70px 10px;
+    overflow: hidden;
 }
 .feature3 .content{
     text-align: center;
@@ -146,3 +147,4 @@ body {
         transform: translateY(-2000px);
     }
 }
+
