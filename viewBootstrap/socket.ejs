@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test socket</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      socket.on('equipLoad', function(data) {
+        console.log(data);
+      });
+      $(function() {
+        $("#btn").click(function() {
+          socket.emit('equipChange',{'key1': 'value1', 'key2':2});
+          console.log('Emitted');
+        });
+      })
+    </script>
+  </head>
+  <body>
+    <h1>hello</h1>
+    <button type="button" id="btn" name="button">Click</button>
+  </body>
+</html>

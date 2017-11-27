@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Control</title>
+        <!-- My css -->
+        <link rel="stylesheet" href="css/mycss.css">
+        <!-- Google icon -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <!-- Socket.io -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="jquery-3.2.1.slim.min.js"> </script>
+        <script>
+        var socket = io();
+        $(function() {
+          <% for(var i=0; i<data.length; i++){%>
+            socket.on('webLoad', function(data) {
+              if('<%=data[i]._id%>'== data.id){
+                <% for(var j=1; j<=3; j++){%>
+                  var color= $("#icon<%=i%><%=j%>").css("color");
+                  if ( (color != 'rgb(0, 128, 0)') && (data.equip==<%=j%>) && (data.value==1) ){
+                    $("#icon<%=i%><%=j%>").css('color', 'green');
+                  }
+                  if ( (color == 'rgb(0, 128, 0)') && (data.equip==<%=j%>) && (data.value==0) ){
+                    $("#icon<%=i%><%=j%>").css('color', '#5f5f5f');
+                  }
+                <%}%>
+              }
+            });
+            socket.on('webLoadSensor', function(data) {
+              if('<%=data[i]._id%>'== data.name){
+                $("#ss<%=i%>1").text('<%=data[i].input1%> '+data.sensor1);
+                $("#ss<%=i%>2").text('<%=data[i].input2%> '+data.sensor2);
+              }
+            });
+            <% for(var j=1; j<=3; j++){%>
+              $('#btn<%=i%><%=j%>').click(function () {
+                var color= $("#icon<%=i%><%=j%>").css("color");
+                if ( color != 'rgb(0, 128, 0)' ) {
+                  socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '1'});
+                  $("#icon<%=i%><%=j%>").css('color', 'green');
+                } else {
+                  socket.emit('webChange',{'id': '<%=data[i]._id%>', 'equip':'<%=j%>', 'value': '0'});
+                  $("#icon<%=i%><%=j%>").css('color', '#5f5f5f');
+                }
+              });
+            <%}%>
+          <%}%>
+        })
+        </script>
+    </head>
+    <body>
+      <div class="container">
+        <div id="header">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a href="/" class="navbar-brand">
+                  <div style="width: 10%">
+                  <img src="../img/logo_of_iot.png" alt="IOT" class="logo_iot_img">
+                   for EveryOne
+                   </div>
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/setup">SETUP</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link disabled" href="#">CONTROL</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <span class="btn btn-outline-success"><%=name%></span>
+                        <a href="/logout" class="nav-link btn btn-outline-success">LOGOUT</a>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <div id="accordion" role="tablist">
+          <% for(var i=0; i<data.length; i++){%>
+          <div class="card">
+            <div class="card-header" role="tab" id="heading<%=i%>">
+              <h5 class="mb-0">
+                <a class="<% if(i != 0){%> collapsed <%}%>btn btn-block" colla data-toggle="collapse"
+                href="#collapse<%= i %>" aria-expanded="true" id="<%=data[i]._id%>">
+                  <%=data[i].name%>
+                </a>
+              </h5>
+            </div>
+            <div id="collapse<%=i%>" class="collapse show" role="tabpanel" aria-labelledby="heading<%=i%>" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3">
+                    <a class="btn btn-outline-success btnEdit" href="/setup/<%=data[i]._id%>" style="display: flex;">Edit Equipment - name</a><br>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="row" >
+                      <div class="col-md-4 btnEdit">
+                        <i id="icon<%=i%>1" class="material-icons" style="font-size:40px; <%if(data[i].valout1==1){%>color:green;<%}else{%>color:#5f5f5f;<%}%>">
+                            offline_pin</i>
+                        <span id="btn<%=i%>1" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output1%></span>
+                      </div>
+                      <div class="col-md-4 btnEdit">
+                        <i id="icon<%=i%>2" class="material-icons" style="font-size:40px; <%if(data[i].valout2==1){%>color:green;<%}else{%>color:#5f5f5f;<%}%>">
+                            offline_pin</i>
+                        <span id="btn<%=i%>2" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output2%></span>
+                      </div>
+                      <div class="col-md-4 btnEdit">
+                        <i id="icon<%=i%>3" class="material-icons" style="font-size:40px; <%if(data[i].valout3==1){%>color:green;<%}else{%>color:#5f5f5f;<%}%>">
+                            offline_pin</i>
+                        <span id="btn<%=i%>3" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output3%></span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button" id="ss<%=i%>1">
+                          <%=data[i].input1%>:&nbsp;<%=data[i].valin1%>
+                        </a>
+                      </div>
+                      <div class="col-md-6">
+                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button" id="ss<%=i%>2">
+                          <%=data[i].input2%>:&nbsp;<%=data[i].valin2%>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%}%>
+        </div>
+
+        <footer class="footer fixed-bottom">
+          <div class="container">
+              <span class="text-muted">Phát triển bởi đội kỹ sư tương lai</span>
+          </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+      </div>
+      </body>
+</html>

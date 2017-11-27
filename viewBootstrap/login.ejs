@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Login - VDK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/mycss.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!-- Bootstrap CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container">
+      <div id="header">
+          <nav class="navbar navbar-expand-md navbar-light fixed-top" role="navigation">
+                <a href="/" class="navbar-brand">
+                    <div style="width: 10%">
+                    <img src="../img/logo_of_iot.png" alt="IOT" class="logo_iot_img">
+                     for EveryOne
+                     </div>
+                  </a>
+              <button type="button" class="navbar-toggler d-lg-none" data-toggle="collapse" data-target="#list">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="list">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li class="nav-item">
+                          <a href="/signup" class="nav-link btn btn-outline-success">SIGNUP</a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="#" class="nav-link disabled">LOGIN</a>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+        </div>
+
+    
+        <!--  <div class="card justify-content-center card-width">
+        <img class="card-img-top" src="img/IOT_LOGO.png" alt="IOT_LOGO" width="100%" height="auto">
+        <div class="card-body">
+            <form action="/login" method="post" enctype="application/x-www-form-urlencoded">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <span style="color: red"><%=content%></span>
+                <label for="inputEmail" class="sr-only">Username</label>
+                <input type="text" name="username" class="form-control" required autofocus value="tungphan">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" required value="tungtung">
+                <button class="btn btn-success btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+        </div> -->
+        <div class="container">
+      <div class="login-container">
+          <div id="output"></div>
+          <div class="avatar"></div>
+      <div class="form-box">
+              <form action="/login" method="post" enctype="application/x-www-form-urlencoded">
+                  <input name="username" type="text" placeholder="username">
+                  <input name="password" type="password" placeholder="password">
+                  <button class="btn btn-info btn-block login" type="submit">Login</button>
+              </form>
+          </div>
+      </div>
+    
+    </div>
+
+    <footer class="footer fixed-bottom">
+        <div class="container">
+            <span class="text-muted">Phát triển bởi đội kỹ sư tương lai</span>
+        </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(function(){
+            var textfield = $("input[name=username]");
+            $('button[type="submit"]').click(function(e) {
+                // e.preventDefault();
+                //little validation just to check username
+                if (textfield.val() != "") {
+                    //$("body").scrollTo("#output");
+                    $("#output").removeClass(' alert-danger');
+                    $("input").css({
+                    "height":"0",
+                    "padding":"0",
+                    "margin":"0",
+                    "opacity":"0"
+                    });
+                    //change button text
+                    $('button[type="submit"]').html("continue")
+                    .removeClass("btn-info")
+                    .addClass("btn-default").click(function(){
+                    $("input").css({
+                    "height":"auto",
+                    "padding":"10px",
+                    "opacity":"1"
+                    }).val("");
+                    });
+
+                    //show avatar
+                    $(".avatar").css({
+                        "background-image": "url('http://api.randomuser.me/0.3.2/portraits/women/35.jpg')"
+                    });
+                } else {
+                    //remove success mesage replaced with error message
+                    $("#output").removeClass(' alert alert-success');
+                    $("#output").addClass("alert alert-danger animated fadeInUp").html("sorry enter a username ");
+                }
+                //console.log(textfield.val());
+
+            });
+});
+
+    </script>
+</div>  
+</body>
+</html>
