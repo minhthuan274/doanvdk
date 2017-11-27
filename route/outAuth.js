@@ -40,7 +40,7 @@ router.post("/", urlencodedParser, ensureAuth, function(req,res) {
 });
 
 router.get("/:id", ensureAuth, function(req, res) {
-  let id= req.params.id;
+  var id= req.params.id;
   room.findById(id, (err, doc)=>{
     if(err) res.render('alert',{content: 'Database was errored'});
     else{
@@ -50,7 +50,7 @@ router.get("/:id", ensureAuth, function(req, res) {
 });
 
 router.post("/:id", urlencodedParser, ensureAuth, (req,res)=>{
-  let id= req.params.id;
+  var id= req.params.id;
   room.update(
     {
       _id: id,
