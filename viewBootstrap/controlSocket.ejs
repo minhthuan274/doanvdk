@@ -56,35 +56,38 @@
     <body>
       <div class="container">
         <div id="header">
-            <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a href="/" class="navbar-brand">
-                  <div style="width: 10%">
-                  <img src="../img/logo_of_iot.png" alt="IOT" class="logo_iot_img">
-                   for EveryOne
-                   </div>
-                </a>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/setup">SETUP</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link disabled" href="#">CONTROL</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <span class="btn btn-outline-success"><%=name%></span>
-                        <a href="/logout" class="nav-link btn btn-outline-success">LOGOUT</a>
-                    </form>
-                </div>
-            </nav>
+          <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+              <div style="width: 10%">
+                <img src="../img/logo_of_iot.png" alt="IOT" class="logo_iot_img"> for EveryOne
+              </div>
+            </a>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/setup">Setup</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/control">Control</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <span> welcome,
+                  <%=name%> &nbsp &nbsp</span>
+                <a href="/logout" class="nav-link btn btn-outline-success">Logout</a>
+              </form>
+            </div>
+          </nav>
         </div>
 
         <div id="accordion" role="tablist">
