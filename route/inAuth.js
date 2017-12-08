@@ -28,7 +28,7 @@ router.route('/signup')
   });
   query.register(newUser, function(err, docs) {
     if(err) res.render('alert',{content: 'Lỗi xảy ra khi truy cập database'});
-    else res.redirect("/");
+    else res.redirect("/login");
   });
 })
 
