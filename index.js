@@ -10,8 +10,8 @@ var db= mongoose.connection;
 app.use(express.static("publics"));
 app.set('view engine','ejs');
 app.set('views','./viewBootstrap');
-var port_number = server.listen(process.env.PORT || 3000);
-http.listen(port_number, function() {
+// var port_number = app.listen(process.env.PORT || 3000);
+http.listen(process.env.PORT || 3000, function() {
   console.log("On server");
 });
 
