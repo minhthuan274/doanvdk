@@ -108,6 +108,23 @@
                     <a class="btn btn-success btnEdit" href="/setup/<%=data[i]._id%>" style="display: flex;">Edit Equipment</a><br>
                   </div>
                   <div class="col-md-9">
+                    <div class="row" style="margin-bottom : 8px;">
+                      <div class="col-md-4">
+                        <h6 style="margin-top: 10px;">ID: <%=data[i]._id%></h6>
+                      </div>
+                      <div class="col-md-4">
+                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button" id="ss<%=i%>1">
+                          <%=data[i].input1%>:&nbsp;
+                            <%=data[i].valin1%>
+                        </a>
+                      </div>
+                      <div class="col-md-4">
+                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button" id="ss<%=i%>2">
+                          <%=data[i].input2%>:&nbsp;
+                            <%=data[i].valin2%>
+                        </a>
+                      </div>
+                    </div>
                     <div class="row" >
                       <div class="col-md-4 btnEdit">
                         <i id="icon<%=i%>1" class="material-icons" style="font-size:40px; <%if(data[i].valout1==1){%>color:green;<%}else{%>color:#5f5f5f;<%}%>">
@@ -125,18 +142,7 @@
                         <span id="btn<%=i%>3" class="btn btn-outline-success"  style="vertical-align: middle"><%=data[i].output3%></span>
                       </div>
                     </div>
-                    <div class="row" style="margin-top: 8px;">
-                      <div class="col-md-6">
-                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button" id="ss<%=i%>1">
-                          <%=data[i].input1%>:&nbsp;<%=data[i].valin1%>
-                        </a>
-                      </div>
-                      <div class="col-md-6">
-                        <a class="btn btn-outline-success btn-block disabled" href="#" role="button" id="ss<%=i%>2">
-                          <%=data[i].input2%>:&nbsp;<%=data[i].valin2%>
-                        </a>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
