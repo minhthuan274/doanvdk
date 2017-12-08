@@ -69,7 +69,13 @@ body {
     margin-bottom: -50px;
 }
 .card{
-    margin: 30px auto;
+    margin: 20px auto;
+}
+.card-header {
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+.card-header:hover {
+    background-color: #5cb87f;
 }
 .card-img-top{
     margin-top:10px;
@@ -84,6 +90,9 @@ body {
 }
 #editSetting-table{
     margin: 10px 10px 10px 20px;
+}
+.card-body-control {
+    padding: 10px;
 }
 
 #stars {
