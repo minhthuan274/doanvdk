@@ -52,72 +52,71 @@
             <div class="row main">
                 <div class="main-login main-center">
                 <h4>Setting</h4>
-                    <form action="/setup" method="post" style="margin-left: 15px">
-                        <div class="form-group">
-                            <label for="name" class="cols-sm-2 control-label"><strong>Tên thiết bị (ESP 8266)</strong></label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                    <input type="text" name="eqname" class="form-control" placeholder="Phòng khách, phòng ngủ...">
-                                </div>
+                <form action="/setup" method="post">
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label"><strong>Tên thiết bị ESP8266</strong></label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <input type="text" name="eqname" class="form-control" placeholder="VD: Phòng khách/ phòng ngủ...">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="email" class="cols-sm-2 control-label">Tên thiết bị output 1:</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                    <input type="text" name="output1" class="form-control" placeholder="Quạt...">
-                                </div>
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Tên thiết bị output 1:</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="text" name="output1" class="form-control" placeholder="VD: Quạt/ Đèn/ Wifi...">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="username" class="cols-sm-2 control-label">Tên thiết bị output 2:</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                    <input type="text" name="output2" class="form-control" placeholder="Đèn...">
-                                </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Tên thiết bị output 2:</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" name="output2" class="form-control" placeholder="VD: Quạt/ Đèn/ Wifi...">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="username" class="cols-sm-2 control-label">Tên thiết bị output 3:</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                    <input type="text" name="output3" class="form-control" placeholder="Wifi..." >
-                                </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Tên thiết bị output 3:</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" name="output3" class="form-control" placeholder="VD: Quạt/ Đèn/ Wifi..." >
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="username" class="cols-sm-2 control-label">Tên thiết bị input 1:</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                    <input type="text" name="input1" class="form-control" placeholder="Nhiệt độ...">
-                                </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Tên thiết bị input 1:</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" name="input1" class="form-control" placeholder="VD: Nhiệt độ/ Độ ẩm...">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="username" class="cols-sm-2 control-label">Tên thiết bị input 2:</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                    <input type="text" name="input2" class="form-control" placeholder="Độ ẩm...">
-                                </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Tên thiết bị input 2:</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" name="input2" class="form-control" placeholder="VD: Nhiệt độ/ Độ ẩm...">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group ">
-                            <input type="submit" class="btn btn-success" value="Submit">
-                        </div>
+                    <div class="form-group" id="button">
+                        <input type="submit" class="btn btn-success" value="Submit">
+                    </div>
 
-                    </form>
+                </form>
                 </div>
             </div>
         </div>

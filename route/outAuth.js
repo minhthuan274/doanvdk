@@ -35,7 +35,7 @@ router.post("/", urlencodedParser, ensureAuth, function(req,res) {
   });
   room.setup(newRoom, (err, docs)=>{
     if (err)  res.render('login',{content: 'Lỗi DATABASE'});
-    else res.redirect('/');
+    else res.redirect("/control");
   })
 });
 
