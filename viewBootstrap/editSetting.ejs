@@ -52,7 +52,7 @@
           <img class="card-img-top" src="img/IOT_LOGO.png" alt="IOT_LOGO" width="100%" height="auto">
           <div class="card-body">
             <form action="/setup/<%=data._id%>" method="post">
-                <table>
+                <table id="editSetting-table">
                     <tr>
                       <td colspan="2" class="text-center">
                         <h4>ID: <%=data._id%></h4>
@@ -68,7 +68,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label>Tên thiết bị output 1:</label>
+                            <label>Tên thiết bị output 1: &nbsp </label>
                         </td>
                         <td>
                             <input type="text" name="output1" class="form-control" value="<%=data.output1%>">
@@ -76,7 +76,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label>Tên thiết bị output 2:</label>
+                            <label>Tên thiết bị output 2: &nbsp </label>
                         </td>
                         <td>
                             <input type="text" name="output2" class="form-control" value="<%=data.output2%>">
@@ -84,7 +84,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label>Tên thiết bị output 3:</label>
+                            <label>Tên thiết bị output 3: &nbsp </label>
                         </td>
                         <td>
                             <input type="text" name="output3" class="form-control" value="<%=data.output3%>">
